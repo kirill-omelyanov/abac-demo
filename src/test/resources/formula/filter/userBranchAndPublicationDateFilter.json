@@ -1,0 +1,53 @@
+{
+  "category": "PREDICATE",
+  "operation": "AND",
+  "operands": [
+    {
+      "category": "PREDICATE",
+      "operation": "EQ",
+      "operands": [
+        {
+          "category": "ENTITY_ATTRIBUTE",
+          "type": "STRING",
+          "field": {
+            "schema": "abac_demo",
+            "table": "publication",
+            "field": "branch"
+          }
+        },
+        {
+          "category": "USER_ATTRIBUTE",
+          "type": "STRING",
+          "path": "branch"
+        }
+      ]
+    },
+    {
+      "category": "PREDICATE",
+      "operation": "LE",
+      "operands": [
+        {
+          "category": "ENTITY_ATTRIBUTE",
+          "type": "LOCAL_DATE",
+          "field": {
+            "schema": "abac_demo",
+            "table": "publication",
+            "field": "publication_date"
+          }
+        },
+        {
+          "category": "FUNCTION",
+          "operation": "CURRENT_LOCAL_DATE",
+          "type": "LOCAL_DATE",
+          "operands": [
+            {
+              "category": "LITERAL",
+              "type": "STRING",
+              "value": "America/New_York"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "category": "FUNCTION",
+  "operation": "FETCH_ALL",
+  "rank": "TUPLE",
+  "type": "NUMBER",
+  "operands": [
+    {
+      "category": "ID",
+      "type": "DATASET",
+      "alias": "outer",
+      "id": {
+        "type": "TABLE",
+        "service": "abac-demo",
+        "schema": "abac_demo",
+        "table": "employee"
+      }
+    },
+    {
+      "category": "FUNCTION",
+      "operation": "ROUND",
+      "type": "INTEGER",
+      "operands": [
+        {
+          "category": "FUNCTION",
+          "operation": "SUBTRACT",
+          "type": "NUMBER",
+          "operands": [
+            {
+              "category": "ENTITY_ATTRIBUTE",
+              "type": "INTEGER",
+              "collection": "outer",
+              "field": {
+                "schema": "abac_demo",
+                "table": "employee",
+                "field": "salary"
+              }
+            },
+            {
+              "category": "FUNCTION",
+              "operation": "AVG",
+              "type": "NUMBER",
+              "operands": [
+                {
+                  "category": "FUNCTION",
+                  "operation": "FETCH_ALL",
+                  "type": "INTEGER",
+                  "rank": "TUPLE",
+                  "operands": [
+                    {
+                      "category": "ID",
+                      "type": "DATASET",
+                      "alias": "inner",
+                      "id": {
+                        "type": "TABLE",
+                        "service": "abac-demo",
+                        "schema": "abac_demo",
+                        "table": "employee"
+                      }
+                    },
+                    {
+                      "category": "ENTITY_ATTRIBUTE",
+                      "type": "INTEGER",
+                      "collection": "inner",
+                      "field": {
+                        "schema": "abac_demo",
+                        "table": "employee",
+                        "field": "salary"
+                      }
+                    },
+                    {
+                      "category": "PREDICATE",
+                      "operation": "EQ",
+                      "operands": [
+                        {
+                          "category": "ENTITY_ATTRIBUTE",
+                          "type": "STRING",
+                          "collection": "inner",
+                          "field": {
+                            "schema": "abac_demo",
+                            "table": "employee",
+                            "field": "branch"
+                          }
+                        },
+                        {
+                          "category": "ENTITY_ATTRIBUTE",
+                          "type": "STRING",
+                          "collection": "outer",
+                          "field": {
+                            "schema": "abac_demo",
+                            "table": "employee",
+                            "field": "branch"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

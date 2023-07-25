@@ -1,0 +1,178 @@
+{
+  "id": "001c6adf-2794-4f67-a5c9-352fdc694976",
+  "category": "BUNDLE",
+  "title": "Chief editor's modification of the employee list",
+  "target": {
+    "id": "0d1bf7a1-c87b-4235-9917-9a5dcdd22730",
+    "type": "ENTITY",
+    "title": "Modification of the Logos employee list",
+    "effect": "WRITE",
+    "descriptors": [
+      {
+        "id": "0542b6b1-490b-458a-979d-196932edba15",
+        "type": "TABLE",
+        "service": "abac-demo",
+        "schema": "abac_demo",
+        "table": "employee"
+      }
+    ]
+  },
+  "permissions": [
+    {
+      "category": "USER",
+      "id": "743525b4-fca8-4570-ad3f-5219b447e176",
+      "title": "Logos media holding employee has the role of Chief Editor",
+      "formula": {
+        "category": "PREDICATE",
+        "operation": "IN",
+        "operands": [
+          {
+            "category": "LITERAL",
+            "type": "STRING",
+            "value": "Chief Editor"
+          },
+          {
+            "category": "USER_ATTRIBUTE",
+            "type": "STRING",
+            "rank": "TUPLE",
+            "path": "roles"
+          }
+        ]
+      }
+    }
+  ],
+  "filters": [
+    {
+      "id": "d58556f4-53ca-4df4-954c-1efc8ffde397",
+      "title": "User can add employees only to their branch and the total salary of employees cannot exceed the total payroll of the entire holding, which is 1,200,000 RUB",
+      "mode": "INCLUDE",
+      "descriptor": {
+        "id": "0542b6b1-490b-458a-979d-196932edba15",
+        "type": "TABLE",
+        "service": "abac-demo",
+        "schema": "abac_demo",
+        "table": "employee"
+      },
+      "rules": [
+        {
+          "id": "2bd7d555-1a7c-4263-8263-ccdb95d31d54",
+          "category": "ENTITY",
+          "title": "User can access employee records only from their own branch",
+          "formula": {
+            "category": "PREDICATE",
+            "operation": "EQ",
+            "operands": [
+              {
+                "category": "USER_ATTRIBUTE",
+                "type": "STRING",
+                "path": "branch"
+              },
+              {
+                "category": "ENTITY_ATTRIBUTE",
+                "type": "STRING",
+                "field": {
+                  "schema": "abac_demo",
+                  "table": "employee",
+                  "field": "branch"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "2bd7d555-1a7c-4263-8263-ccdb95d31d55",
+          "category": "ENTITY",
+          "title": "The sum of employees' salaries cannot exceed the total payroll of the entire holding, which is 1,200,000 RUB",
+          "formula": {
+            "category": "PREDICATE",
+            "operation": "LE",
+            "operands": [
+              {
+                "category": "FUNCTION",
+                "operation": "SUM",
+                "type": "INTEGER",
+                "operands": [
+                  {
+                    "category": "FUNCTION",
+                    "operation": "FETCH_ALL",
+                    "type": "INTEGER",
+                    "rank": "TUPLE",
+                    "operands": [
+                      {
+                        "category": "ID",
+                        "type": "DATASET",
+                        "id": {
+                          "type": "TABLE",
+                          "service": "abac-demo",
+                          "schema": "abac_demo",
+                          "table": "employee"
+                        }
+                      },
+                      {
+                        "category": "ENTITY_ATTRIBUTE",
+                        "type": "INTEGER",
+                        "field": {
+                          "schema": "abac_demo",
+                          "table": "employee",
+                          "field": "salary"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "category": "LITERAL",
+                "type": "INTEGER",
+                "value": "1200000"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "projections": [
+    {
+      "id": "8d0358cc-6039-4cbf-8952-1a3351cf3b77",
+      "title": "Fields in the employee table accessible to the Chief Editor",
+      "mode": "INCLUDE",
+      "descriptor": {
+        "id": "0542b6b1-490b-458a-979d-196932edba15",
+        "type": "TABLE",
+        "service": "abac-demo",
+        "schema": "abac_demo",
+        "table": "employee"
+      },
+      "jsonSchema": {
+        "type": "object",
+        "$schema": "https://json-schema.org/draft/2019-09/schema",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "branch": {
+            "type": "string"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "salary": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  ]}

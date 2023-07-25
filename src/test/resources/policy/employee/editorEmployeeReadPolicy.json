@@ -1,0 +1,129 @@
+{
+  "id": "b4db6060-dd84-4314-9110-274deef4f1fc",
+  "category": "BUNDLE",
+  "title": "Reading the list of employees by a chief editor",
+  "target": {
+    "id": "6a6ecae9-8b0c-4097-8b61-f36358b23ce6",
+    "type": "ENTITY",
+    "title": "Reading Logos employee list",
+    "effect": "READ",
+    "descriptors": [
+      {
+        "id": "0542b6b1-490b-458a-979d-196932edba15",
+        "type": "TABLE",
+        "service": "abac-demo",
+        "schema": "abac_demo",
+        "table": "employee"
+      }
+    ]
+  },
+  "permissions": [
+    {
+      "category": "USER",
+      "id": "743525b4-fca8-4570-ad3f-5219b447e176",
+      "title": "Logos media holding employee in chief editor role",
+      "formula": {
+        "category": "PREDICATE",
+        "operation": "IN",
+        "operands": [
+          {
+            "category": "LITERAL",
+            "type": "STRING",
+            "value": "Chief Editor"
+          },
+          {
+            "category": "USER_ATTRIBUTE",
+            "type": "STRING",
+            "rank": "TUPLE",
+            "path": "roles"
+          }
+        ]
+      }
+    }
+  ],
+  "filters": [
+    {
+      "id": "553dbdaf-fa5c-42a3-a505-129fd832092b",
+      "title": "Employee filter for chief editor",
+      "mode": "INCLUDE",
+      "descriptor": {
+        "id": "0542b6b1-490b-458a-979d-196932edba15",
+        "type": "TABLE",
+        "service": "abac-demo",
+        "schema": "abac_demo",
+        "table": "employee"
+      },
+      "rules": [
+        {
+          "id": "3c219456-1f1c-400e-8f5d-1f3c2b6b6150",
+          "category": "ENTITY",
+          "title": "Record's branch matches user's branch",
+          "formula": {
+            "category": "PREDICATE",
+            "operation": "EQ",
+            "operands": [
+              {
+                "category": "USER_ATTRIBUTE",
+                "type": "STRING",
+                "path": "branch"
+              },
+              {
+                "category": "ENTITY_ATTRIBUTE",
+                "type": "STRING",
+                "field": {
+                  "schema": "abac_demo",
+                  "table": "employee",
+                  "field": "branch"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "projections": [
+    {
+      "id": "8d0358cc-6039-4cbf-8952-1a3351cf3b77",
+      "title": "Employee table fields available to chief editor",
+      "mode": "INCLUDE",
+      "descriptor": {
+        "id": "0542b6b1-490b-458a-979d-196932edba15",
+        "type": "TABLE",
+        "service": "abac-demo",
+        "schema": "abac_demo",
+        "table": "employee"
+      },
+      "jsonSchema": {
+        "type": "object",
+        "$schema": "https://json-schema.org/draft/2019-09/schema",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "branch": {
+            "type": "string"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "salary": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  ]
+}

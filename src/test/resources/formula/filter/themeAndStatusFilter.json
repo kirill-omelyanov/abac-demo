@@ -1,0 +1,49 @@
+{
+  "category": "PREDICATE",
+  "operation": "OR",
+  "operands": [
+    {
+      "category": "PREDICATE",
+      "operation": "IN",
+      "operands": [
+        {
+          "category": "ENTITY_ATTRIBUTE",
+          "type": "STRING",
+          "field": {
+            "schema": "abac_demo",
+            "table": "publication",
+            "field": "theme"
+          }
+        },
+        {
+          "category": "ARRAY",
+          "type": "STRING",
+          "value": [
+            "Education",
+            "Politics"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "PREDICATE",
+      "operation": "EQ",
+      "operands": [
+        {
+          "category": "ENTITY_ATTRIBUTE",
+          "type": "STRING",
+          "field": {
+            "schema": "abac_demo",
+            "table": "publication",
+            "field": "status"
+          }
+        },
+        {
+          "category": "LITERAL",
+          "type": "STRING",
+          "value": "Published"
+        }
+      ]
+    }
+  ]
+}

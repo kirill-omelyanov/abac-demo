@@ -1,0 +1,218 @@
+{
+  "id": "1ddb6138-094e-4a79-a085-173fe4dada92",
+  "category": "BUNDLE",
+  "title": "Changing the publication list by the editor-in-chief",
+  "target": {
+    "id": "1fb4413a-acd6-4077-9855-d57debf5b9da",
+    "type": "ENTITY",
+    "title": "Changing the Logos publication list",
+    "effect": "WRITE",
+    "descriptors": [
+      {
+        "id": "a0d6445c-24fd-4b49-bce0-02bb8a9217ca",
+        "type": "TABLE",
+        "service": "abac-demo",
+        "schema": "abac_demo",
+        "table": "publication"
+      }
+    ]
+  },
+  "permissions": [
+    {
+      "category": "USER",
+      "id": "743525b4-fca8-4570-ad3f-5219b447e176",
+      "title": "Logos media holding employee has an Chief Editor role",
+      "formula": {
+        "category": "PREDICATE",
+        "operation": "IN",
+        "operands": [
+          {
+            "category": "LITERAL",
+            "type": "STRING",
+            "value": "Chief Editor"
+          },
+          {
+            "category": "USER_ATTRIBUTE",
+            "type": "STRING",
+            "rank": "TUPLE",
+            "path": "roles"
+          }
+        ]
+      }
+    }
+  ],
+  "filters": [
+    {
+      "id": "2d64a140-3904-437f-bac9-b34fb5c5914d",
+      "title": "Filter for changing publication by a chief editor",
+      "mode": "INCLUDE",
+      "descriptor": {
+        "id": "a0d6445c-24fd-4b49-bce0-02bb8a9217ca",
+        "type": "TABLE",
+        "service": "abac-demo",
+        "schema": "abac_demo",
+        "table": "publication"
+      },
+      "rules": [
+        {
+          "id": "bde8eff5-9228-48c8-b8ec-ca5a3f3a371f",
+          "category": "ENTITY",
+          "title": "Chief editor can modify all articles of his branch, but for each date, the branch can have no more than one analytical article of each type",
+          "formula": {
+            "category": "PREDICATE",
+            "operation": "AND",
+            "operands": [
+              {
+                "category": "PREDICATE",
+                "operation": "EQ",
+                "operands": [
+                  {
+                    "category": "USER_ATTRIBUTE",
+                    "type": "STRING",
+                    "path": "branch"
+                  },
+                  {
+                    "category": "ENTITY_ATTRIBUTE",
+                    "type": "STRING",
+                    "field": {
+                      "schema": "abac_demo",
+                      "table": "publication",
+                      "field": "branch"
+                    }
+                  }
+                ]
+              },
+              {
+                "category": "PREDICATE",
+                "operation": "NOT",
+                "operands": [
+                  {
+                    "category": "PREDICATE",
+                    "operation": "EXISTS",
+                    "operands": [
+                      {
+                        "category": "ID",
+                        "type": "DATASET",
+                        "alias": "all_publications",
+                        "id": {
+                          "type": "TABLE",
+                          "service": "abac-demo",
+                          "schema": "abac_demo",
+                          "table": "publication"
+                        }
+                      },
+                      {
+                        "category": "PREDICATE",
+                        "operation": "NE",
+                        "operands": [
+                          {
+                            "category": "ENTITY_ATTRIBUTE",
+                            "type": "UUID",
+                            "collection": "all_publications",
+                            "field": {
+                              "schema": "abac_demo",
+                              "table": "publication",
+                              "field": "id"
+                            }
+                          },
+                          {
+                            "category": "ENTITY_ATTRIBUTE",
+                            "type": "UUID",
+                            "collection": "root",
+                            "field": {
+                              "schema": "abac_demo",
+                              "table": "publication",
+                              "field": "id"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "category": "PREDICATE",
+                        "operation": "EQ",
+                        "operands": [
+                          {
+                            "category": "ENTITY_ATTRIBUTE",
+                            "type": "STRING",
+                            "collection": "all_publications",
+                            "field": {
+                              "schema": "abac_demo",
+                              "table": "publication",
+                              "field": "theme"
+                            }
+                          },
+                          {
+                            "category": "ENTITY_ATTRIBUTE",
+                            "type": "STRING",
+                            "collection": "root",
+                            "field": {
+                              "schema": "abac_demo",
+                              "table": "publication",
+                              "field": "theme"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "category": "PREDICATE",
+                        "operation": "EQ",
+                        "operands": [
+                          {
+                            "category": "ENTITY_ATTRIBUTE",
+                            "type": "STRING",
+                            "collection": "all_publications",
+                            "field": {
+                              "schema": "abac_demo",
+                              "table": "publication",
+                              "field": "branch"
+                            }
+                          },
+                          {
+                            "category": "ENTITY_ATTRIBUTE",
+                            "type": "STRING",
+                            "collection": "root",
+                            "field": {
+                              "schema": "abac_demo",
+                              "table": "publication",
+                              "field": "branch"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "category": "PREDICATE",
+                        "operation": "EQ",
+                        "operands": [
+                          {
+                            "category": "ENTITY_ATTRIBUTE",
+                            "type": "LOCAL_DATE",
+                            "collection": "all_publications",
+                            "field": {
+                              "schema": "abac_demo",
+                              "table": "publication",
+                              "field": "publication_date"
+                            }
+                          },
+                          {
+                            "category": "ENTITY_ATTRIBUTE",
+                            "type": "LOCAL_DATE",
+                            "collection": "root",
+                            "field": {
+                              "schema": "abac_demo",
+                              "table": "publication",
+                              "field": "publication_date"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "id": "7a17f8a2-9f72-48e4-8aeb-67083f24ebe4",
+  "category": "BUNDLE",
+  "title": "Journalist's modification of the publication list",
+  "target": {
+    "id": "1fb4413a-acd6-4077-9855-d57debf5b9da",
+    "type": "ENTITY",
+    "title": "Modification of Logos publication list",
+    "effect": "WRITE",
+    "descriptors": [
+      {
+        "id": "a0d6445c-24fd-4b49-bce0-02bb8a9217ca",
+        "type": "TABLE",
+        "service": "abac-demo",
+        "schema": "abac_demo",
+        "table": "publication"
+      }
+    ]
+  },
+  "permissions": [
+    {
+      "category": "USER",
+      "id": "895319a2-8d95-4d07-9584-2dad7578a296",
+      "title": "Logos media holding employee has a Journalist role",
+      "formula": {
+        "category": "PREDICATE",
+        "operation": "IN",
+        "operands": [
+          {
+            "category": "LITERAL",
+            "type": "STRING",
+            "value": "Journalist"
+          },
+          {
+            "category": "USER_ATTRIBUTE",
+            "type": "STRING",
+            "rank": "TUPLE",
+            "path": "roles"
+          }
+        ]
+      }
+    }
+  ],
+  "filters": [
+    {
+      "id": "fc1e0b65-985b-4dce-b097-237197de2b95",
+      "title": "Filter for journalist's publication modification",
+      "mode": "INCLUDE",
+      "descriptor": {
+        "id": "a0d6445c-24fd-4b49-bce0-02bb8a9217ca",
+        "type": "TABLE",
+        "service": "abac-demo",
+        "schema": "abac_demo",
+        "table": "publication"
+      },
+      "rules": [
+        {
+          "id": "940d32e5-90b3-4206-9551-a4123fa597f7",
+          "category": "ENTITY",
+          "title": "Journalist can create, modify and delete his article in his branch, if its theme is in his competence list",
+          "formula": {
+            "category": "PREDICATE",
+            "operation": "AND",
+            "operands": [
+              {
+                "category": "PREDICATE",
+                "operation": "EQ",
+                "operands": [
+                  {
+                    "category": "USER_ATTRIBUTE",
+                    "type": "STRING",
+                    "path": "branch"
+                  },
+                  {
+                    "category": "ENTITY_ATTRIBUTE",
+                    "type": "STRING",
+                    "field": {
+                      "schema": "abac_demo",
+                      "table": "publication",
+                      "field": "branch"
+                    }
+                  }
+                ]
+              },
+              {
+                "category": "PREDICATE",
+                "operation": "EQ",
+                "operands": [
+                  {
+                    "category": "ENTITY_ATTRIBUTE",
+                    "type": "UUID",
+                    "field": {
+                      "schema": "abac_demo",
+                      "table": "publication",
+                      "field": "author_id"
+                    }
+                  },
+                  {
+                    "category": "USER_ATTRIBUTE",
+                    "type": "UUID",
+                    "path": "id"
+                  }
+                ]
+              },
+              {
+                "category": "PREDICATE",
+                "operation": "IN",
+                "operands": [
+                  {
+                    "category": "ENTITY_ATTRIBUTE",
+                    "type": "STRING",
+                    "field": {
+                      "schema": "abac_demo",
+                      "table": "publication",
+                      "field": "theme"
+                    }
+                  },
+                  {
+                    "category": "USER_ATTRIBUTE",
+                    "type": "STRING",
+                    "rank": "TUPLE",
+                    "path": "skills"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

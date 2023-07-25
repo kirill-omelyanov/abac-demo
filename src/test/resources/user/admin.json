@@ -1,0 +1,13 @@
+{
+  "id": "00000000-0000-0000-0000-000000000001",
+  "name": "John",
+  "branch": "NY",
+  "roles": [
+    "Chief Editor", "Admin"
+  ],
+  "skills": [
+    "Politics", "Economics", "IT"
+  ],
+  "passport": "4506 111111",
+  "salary": 350000
+}

@@ -1,0 +1,25 @@
+{
+  "category": "FUNCTION",
+  "operation": "DIVIDE",
+  "type": "NUMBER",
+  "operands": [
+    {
+      "category": "USER_ATTRIBUTE",
+      "type": "INTEGER",
+      "path": "salary"
+    },
+    {
+      "category": "FUNCTION",
+      "operation": "SIZE",
+      "type": "INTEGER",
+      "operands": [
+        {
+          "category": "USER_ATTRIBUTE",
+          "type": "STRING",
+          "rank": "TUPLE",
+          "path": "skills"
+        }
+      ]
+    }
+  ]
+}

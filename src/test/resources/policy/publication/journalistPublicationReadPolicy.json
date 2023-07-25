@@ -1,0 +1,85 @@
+{
+  "id": "b7dea62d-a4c6-4e4a-a8ac-6d591a8e9735",
+  "category": "BUNDLE",
+  "title": "Journalist's reading of the publication list",
+  "target": {
+    "id": "5a93c393-511f-4cbd-937b-256ae8b94d87",
+    "type": "ENTITY",
+    "title": "Reading of Logos publication list",
+    "effect": "READ",
+    "descriptors": [
+      {
+        "id": "a0d6445c-24fd-4b49-bce0-02bb8a9217ca",
+        "type": "TABLE",
+        "service": "abac-demo",
+        "schema": "abac_demo",
+        "table": "publication"
+      }
+    ]
+  },
+  "permissions": [
+    {
+      "category": "USER",
+      "id": "895319a2-8d95-4d07-9584-2dad7578a296",
+      "title": "Logos media holding employee has a Journalist role",
+      "formula": {
+        "category": "PREDICATE",
+        "operation": "IN",
+        "operands": [
+          {
+            "category": "LITERAL",
+            "type": "STRING",
+            "value": "Journalist"
+          },
+          {
+            "category": "USER_ATTRIBUTE",
+            "type": "STRING",
+            "rank": "TUPLE",
+            "path": "roles"
+          }
+        ]
+      }
+    }
+  ],
+  "filters": [
+    {
+      "id": "fe5fe1ba-7b8e-46dd-8065-91b0b83c9edd",
+      "title": "Publication filter for journalist",
+      "mode": "INCLUDE",
+      "descriptor": {
+        "id": "a0d6445c-24fd-4b49-bce0-02bb8a9217ca",
+        "type": "TABLE",
+        "service": "abac-demo",
+        "schema": "abac_demo",
+        "table": "publication"
+      },
+      "rules": [
+        {
+          "id": "5894bf47-10fc-4fb3-b1a3-e01056f82d56",
+          "category": "ENTITY",
+          "title": "User is the author of the publication",
+          "formula": {
+            "category": "PREDICATE",
+            "operation": "EQ",
+            "operands": [
+              {
+                "category": "ENTITY_ATTRIBUTE",
+                "type": "UUID",
+                "field": {
+                  "schema": "abac_demo",
+                  "table": "publication",
+                  "field": "author_id"
+                }
+              },
+              {
+                "category": "USER_ATTRIBUTE",
+                "type": "UUID",
+                "path": "id"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

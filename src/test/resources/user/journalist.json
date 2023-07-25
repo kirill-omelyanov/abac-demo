@@ -1,0 +1,13 @@
+{
+  "id": "00000000-0000-0000-0000-000000000003",
+  "name": "Mike",
+  "branch": "NY",
+  "roles": [
+    "Journalist"
+  ],
+  "skills": [
+    "Education", "Economics"
+  ],
+  "passport": "4506 111113",
+  "salary": 150000
+}

@@ -1,0 +1,75 @@
+{
+  "divergence": {
+    "category": "FUNCTION",
+    "operation": "ROUND",
+    "type": "INTEGER",
+    "operands": [
+      {
+        "category": "FUNCTION",
+        "operation": "SUBTRACT",
+        "type": "NUMBER",
+        "operands": [
+          {
+            "category": "SCOPE_ATTRIBUTE",
+            "type": "INTEGER",
+            "path": "salary"
+          },
+          {
+            "category": "FUNCTION",
+            "operation": "AVG",
+            "type": "NUMBER",
+            "operands": [
+              {
+                "category": "FUNCTION",
+                "operation": "FETCH_ALL",
+                "type": "INTEGER",
+                "rank": "TUPLE",
+                "operands": [
+                  {
+                    "category": "ID",
+                    "type": "DATASET",
+                    "id": {
+                      "type": "TABLE",
+                      "service": "abac-demo",
+                      "schema": "abac_demo",
+                      "table": "employee"
+                    }
+                  },
+                  {
+                    "category": "ENTITY_ATTRIBUTE",
+                    "type": "INTEGER",
+                    "field": {
+                      "schema": "abac_demo",
+                      "table": "employee",
+                      "field": "salary"
+                    }
+                  },
+                  {
+                    "category": "PREDICATE",
+                    "operation": "EQ",
+                    "operands": [
+                      {
+                        "category": "ENTITY_ATTRIBUTE",
+                        "type": "STRING",
+                        "field": {
+                          "schema": "abac_demo",
+                          "table": "employee",
+                          "field": "branch"
+                        }
+                      },
+                      {
+                        "category": "SCOPE_ATTRIBUTE",
+                        "type": "STRING",
+                        "path": "branch"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

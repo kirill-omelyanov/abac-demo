@@ -1,0 +1,93 @@
+{
+  "id": "ec8bf784-f6e1-47da-a234-6e879b050c90",
+  "category": "BUNDLE",
+  "title": "Accountant's access to employee list",
+  "target": {
+    "id": "6a6ecae9-8b0c-4097-8b61-f36358b23ce6",
+    "type": "ENTITY",
+    "title": "Reading Logos employee list",
+    "effect": "READ",
+    "descriptors": [
+      {
+        "id": "0542b6b1-490b-458a-979d-196932edba15",
+        "type": "TABLE",
+        "service": "abac-demo",
+        "schema": "abac_demo",
+        "table": "employee"
+      }
+    ]
+  },
+  "permissions": [
+    {
+      "category": "USER",
+      "id": "4bc8d194-40e2-43d6-9db1-4ba1152b0320",
+      "title": "Logos media holding employee in accountant role",
+      "formula": {
+        "category": "PREDICATE",
+        "operation": "IN",
+        "operands": [
+          {
+            "category": "LITERAL",
+            "type": "STRING",
+            "value": "Accountant"
+          },
+          {
+            "category": "USER_ATTRIBUTE",
+            "type": "STRING",
+            "rank": "TUPLE",
+            "path": "roles"
+          }
+        ]
+      }
+    }
+  ],
+  "filters": [
+    {
+      "id": "e9df971b-6815-4464-a4cc-907c284503aa",
+      "title": "All Logos media holding employees",
+      "mode": "WILDCARD",
+      "descriptor": {
+        "id": "0542b6b1-490b-458a-979d-196932edba15",
+        "type": "TABLE",
+        "service": "abac-demo",
+        "schema": "abac_demo",
+        "table": "employee"
+      }
+    }
+  ],
+  "projections": [
+    {
+      "id": "51fc76cf-592e-47df-ab82-ba88afe6e1cf",
+      "title": "Employee table fields available to accountant",
+      "mode": "INCLUDE",
+      "descriptor": {
+        "id": "0542b6b1-490b-458a-979d-196932edba15",
+        "type": "TABLE",
+        "service": "abac-demo",
+        "schema": "abac_demo",
+        "table": "employee"
+      },
+      "jsonSchema": {
+        "type": "object",
+        "$schema": "https://json-schema.org/draft/2019-09/schema",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "branch": {
+            "type": "string"
+          },
+          "passport": {
+            "type": "string"
+          },
+          "salary": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  ]
+}

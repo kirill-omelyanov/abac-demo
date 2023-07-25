@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.8</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.soarse</groupId>
+    <artifactId>abac-demo</artifactId>
+    <version>1.0.0</version>
+
+    <name>ABAC Demo</name>
+    <description>Demonstration project with examples of using the abac-spring-boot-starter library</description>
+
+    <properties>
+        <libraries.version>4.10.14</libraries.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>17</java.version>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>nexus-soarse</id>
+            <url>https://nexus.soarse.com/repository/maven-ext-abac</url>
+            <snapshots>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <dependencies>
+
+        <!-- Soarse	-->
+        <dependency>
+            <groupId>com.soarse</groupId>
+            <artifactId>abac-spring-boot-starter</artifactId>
+            <version>${libraries.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.soarse</groupId>
+                    <artifactId>soarse-relations-client</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.soarse</groupId>
+                    <artifactId>jpa-spring-boot-starter</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.soarse</groupId>
+            <artifactId>commons-spring-boot-starter</artifactId>
+            <version>${libraries.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-data-jpa</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.soarse</groupId>
+            <artifactId>commons-test</artifactId>
+            <version>${libraries.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.soarse</groupId>
+            <artifactId>formula-spring-boot-starter</artifactId>
+            <version>${libraries.version}</version>
+        </dependency>
+
+
+        <!-- Spring	-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jooq</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Database -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+
+        <!-- Testcontainers -->
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers</artifactId>
+            <version>1.16.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>1.16.2</version>
+        </dependency>
+
+        <!-- Test -->
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>1.17.6</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.6.3</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>-Dfile.encoding=${project.build.sourceEncoding}</argLine>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+
+        <!-- jOOQ -->
+        <profile>
+            <id>jooq</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>properties-maven-plugin</artifactId>
+                        <version>1.1.0</version>
+                        <executions>
+                            <execution>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>read-project-properties</goal>
+                                </goals>
+                                <configuration>
+                                    <files>
+                                        <file>src/main/resources/db/db.properties</file>
+                                    </files>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.flywaydb</groupId>
+                        <artifactId>flyway-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>migrate</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <schemas>
+                                <schema>abac_demo</schema>
+                            </schemas>
+                            <defaultSchema>abac_demo</defaultSchema>
+                            <!--suppress UnresolvedMavenProperty -->
+                            <driver>${db.driver}</driver>
+                            <!--suppress UnresolvedMavenProperty -->
+                            <url>${db.url}</url>
+                            <!--suppress UnresolvedMavenProperty -->
+                            <user>${db.username}</user>
+                            <!--suppress UnresolvedMavenProperty -->
+                            <password>${db.password}</password>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.jooq</groupId>
+                        <artifactId>jooq-codegen-maven</artifactId>
+                        <executions>
+                            <execution>
+                                <id>jooq-codegen</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <jdbc>
+                                <!--suppress UnresolvedMavenProperty -->
+                                <driver>${db.driver}</driver>
+                                <!--suppress UnresolvedMavenProperty -->
+                                <url>${db.url}</url>
+                                <!--suppress UnresolvedMavenProperty -->
+                                <user>${db.username}</user>
+                                <!--suppress UnresolvedMavenProperty -->
+                                <password>${db.password}</password>
+                            </jdbc>
+                            <generator>
+                                <generate>
+                                    <pojos>false</pojos>
+                                    <daos>false</daos>
+                                    <javaTimeTypes>true</javaTimeTypes>
+                                </generate>
+                                <database>
+                                    <name>org.jooq.meta.postgres.PostgresDatabase</name>
+                                    <includes>.*</includes>
+                                    <excludes>
+                                        flyway_schema_history
+                                        | uuid_generate_v.* | uuid_ns_.* | uuid_nil
+                                        | dataset_type | descriptor_type | descriptor
+                                    </excludes>
+                                    <inputSchema>abac_demo</inputSchema>
+                                    <includeTables>true</includeTables>
+                                    <includeRoutines>true</includeRoutines>
+                                    <includePackages>false</includePackages>
+                                    <includePackageRoutines>false</includePackageRoutines>
+                                    <includePackageUDTs>false</includePackageUDTs>
+                                    <includePackageConstants>false</includePackageConstants>
+                                    <includeUDTs>false</includeUDTs>
+                                    <includeSequences>false</includeSequences>
+                                    <includePrimaryKeys>false</includePrimaryKeys>
+                                    <includeUniqueKeys>false</includeUniqueKeys>
+                                    <includeForeignKeys>false</includeForeignKeys>
+                                    <includeIndexes>false</includeIndexes>
+                                </database>
+                                <target>
+                                    <packageName>com.soarse.abac.demo.generated.jooq</packageName>
+                                    <directory>src/main/java</directory>
+                                </target>
+                            </generator>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>

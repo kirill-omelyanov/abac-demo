@@ -1,0 +1,85 @@
+{
+  "id": "0d0eb403-f101-4541-bb84-2097d25080a0",
+  "category": "BUNDLE",
+  "title": "Reading the list of publications by a chief editor",
+  "target": {
+    "id": "5a93c393-511f-4cbd-937b-256ae8b94d87",
+    "type": "ENTITY",
+    "title": "Reading the Logos publication list",
+    "effect": "READ",
+    "descriptors": [
+      {
+        "id": "a0d6445c-24fd-4b49-bce0-02bb8a9217ca",
+        "type": "TABLE",
+        "service": "abac-demo",
+        "schema": "abac_demo",
+        "table": "publication"
+      }
+    ]
+  },
+  "permissions": [
+    {
+      "category": "USER",
+      "id": "743525b4-fca8-4570-ad3f-5219b447e176",
+      "title": "Logos media holding employee has the role of Chief Editor",
+      "formula": {
+        "category": "PREDICATE",
+        "operation": "IN",
+        "operands": [
+          {
+            "category": "LITERAL",
+            "type": "STRING",
+            "value": "Chief Editor"
+          },
+          {
+            "category": "USER_ATTRIBUTE",
+            "type": "STRING",
+            "rank": "TUPLE",
+            "path": "roles"
+          }
+        ]
+      }
+    }
+  ],
+  "filters": [
+    {
+      "id": "9a4b418a-d1e9-4308-babb-f0a3fdc9f1ec",
+      "title": "Publication filter for a chief editor",
+      "mode": "INCLUDE",
+      "descriptor": {
+        "id": "a0d6445c-24fd-4b49-bce0-02bb8a9217ca",
+        "type": "TABLE",
+        "service": "abac-demo",
+        "schema": "abac_demo",
+        "table": "publication"
+      },
+      "rules": [
+        {
+          "id": "3c219456-1f1c-400e-8f5d-1f3c2b6b6150",
+          "category": "ENTITY",
+          "title": "Branch in the record matches the user's branch",
+          "formula": {
+            "category": "PREDICATE",
+            "operation": "EQ",
+            "operands": [
+              {
+                "category": "USER_ATTRIBUTE",
+                "type": "STRING",
+                "path": "branch"
+              },
+              {
+                "category": "ENTITY_ATTRIBUTE",
+                "type": "STRING",
+                "field": {
+                  "schema": "abac_demo",
+                  "table": "publication",
+                  "field": "branch"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "id": "00000000-0000-0000-0000-000000000002",
+  "name": "Peter",
+  "branch": "NY",
+  "roles": [
+    "Accountant"
+  ],
+  "skills": [
+    "Salary", "Taxes"
+  ],
+  "passport": "4506 111112",
+  "salary": 210000
+}
