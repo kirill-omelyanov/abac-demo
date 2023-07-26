@@ -6,7 +6,7 @@ VALUES ('00000001-0000-0000-0000-000000000001', 'NY', 'Economics', '00000000-000
        ('00000001-0000-0000-0000-000000000003', 'NY', 'Education', '00000000-0000-0000-0000-000000000003', 'Ready', '2023-05-25',
         'Columbia University Alumni Reunion'),
        ('00000001-0000-0000-0000-000000000004', 'LA', 'Economics', '00000000-0000-0000-0000-000000000004', 'In progress', null,
-        'Business Development in New York'),
+        'Business development in Los Angeles'),
        ('00000001-0000-0000-0000-000000000005', 'LA', 'Politics', '00000000-0000-0000-0000-000000000005', 'Ready', '2023-06-10',
         'LA mayoral election');
 
