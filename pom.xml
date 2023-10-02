@@ -18,7 +18,7 @@
     <description>Demonstration project with examples of using the abac-spring-boot-starter library</description>
 
     <properties>
-        <libraries.version>4.10.14</libraries.version>
+        <libraries.version>4.10.15</libraries.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>17</java.version>
@@ -26,11 +26,8 @@
 
     <repositories>
         <repository>
-            <id>nexus-soarse</id>
-            <url>https://nexus.soarse.com/repository/maven-ext-abac</url>
-            <snapshots>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/kirill-omelyanov/abac-dependencies</url>
         </repository>
     </repositories>
 
