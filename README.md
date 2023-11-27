@@ -86,3 +86,4 @@ To set up and run the `abac-demo` project on a Windows operating system, follow 
     mvn package -s settings.xml -DTEST_POSTGRESQL_IMAGE=postgres:12.1-alpine
    ```
    Upon successful build, all tests should pass, and an executable jar file will be created.
+7. Explore the tests within your preferred IDE to understand the details of processing the use-cases demonstrated in the presentation video.
