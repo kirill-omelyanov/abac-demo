@@ -1,0 +1,11 @@
+<settings>
+
+  <servers>
+        <server>
+            <id>github</id>
+            <username>kirill-omelyanov</username>
+            <password>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</password>
+        </server>
+    </servers>
+
+</settings>
