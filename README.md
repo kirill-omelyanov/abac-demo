@@ -50,8 +50,26 @@ minimizing the impact on application performance.
 
 Soarse ABAC non-invasive nature aligns with frameworks like Spring, maintaining a clear separation between business logic and infrastructure code.
 
+## Documentation
+To understand the background and architecture of the project, please refer to the following documents:
 
+### **Soarse ABAC Architecture**
 
+- [Positioning of Soarse ABAC](https://drive.google.com/file/d/1qKoPvp-0JQvDT0ZqykFxGdLkhdAzZ1US/view?usp=drive_link)
+- [XACML Analysis](https://drive.google.com/file/d/1SAMqPb4akguPs4RUvUGxx-LB2qdGLZ3X/view?usp=sharing)
+- [Integration with Soarse ABAC](https://drive.google.com/file/d/14yMHUujAFE05Pyl5_lQTjKHnmTpnPUet/view?usp=sharing)
+
+### **ABAC Library**
+
+- [Applying ABAC](https://drive.google.com/file/d/1YrDyqgSL9Acpq5rDltVP9j4LjHHBApKX/view?usp=sharing)
+- [Permission Functions](https://drive.google.com/file/d/1Mu8HhBUfpI05C2yMxNJ5RlMy5XvOFtMx/view?usp=sharing)
+- [Filtering Functions](https://drive.google.com/file/d/1GDRj3QV9W9kNSuufi7boTirQqh8tU-eq/view?usp=sharing)
+
+### **Formula Library**
+
+- [Formula Structure](https://drive.google.com/file/d/1x83c6qpJYCsh04N_7P87GM77uwsPz28-/view?usp=sharing)
+- [Mechanism of Filtering](https://drive.google.com/file/d/13gTzW7anACbS7dQGdK_mZQZABnJYDxtM/view?usp=sharing)
+- [Evaluation and Simplification of Formulas](https://drive.google.com/file/d/1Dm1szQTATXdkVnOdMmpt_kk6I9PkCY_t/view?usp=sharing)
 
 ## Installation and Running Instructions
 
