@@ -82,7 +82,8 @@ To set up and run the `abac-demo` project on a Windows operating system, follow 
    ```bash
    git clone https://github.com/kirill-omelyanov/abac-demo.git
    ```
-5. Build the project using Maven:
+5. Copy the **[settings.xml](https://drive.google.com/file/d/1SCalUNzhgkOECBvd4XUo7xqDanSe59W2/view?usp=sharing)** file to the root folder of the abac-demo project.
+6. Build the project using Maven:
    ```bash
     mvn package -s settings.xml -DTEST_POSTGRESQL_IMAGE=postgres:12.1-alpine
    ```
