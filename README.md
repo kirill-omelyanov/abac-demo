@@ -1,6 +1,6 @@
 # ABAC-Demo Project
 
-The `abac-demo` project showcases the functionality of the abac-spring-boot-starter and formula-spring-boot-starter libraries from Soarse ABAC project, showcasing a range of tests that cover diverse use-cases.
+The `abac-demo` project showcases the functionality of the `abac-spring-boot-starter` and `formula-spring-boot-starter` libraries from Soarse ABAC project, showcasing a range of tests that cover diverse use-cases.
 
 
 ## Overview
