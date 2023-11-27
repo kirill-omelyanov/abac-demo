@@ -2,6 +2,8 @@
 
 The `abac-demo` project showcases the functionality of the `abac-spring-boot-starter` and `formula-spring-boot-starter` libraries from Soarse ABAC project, showcasing a range of tests that cover diverse use-cases.
 
+For a detailed overview of Soarse ABAC and Soarse Formula's functionalities, please view our YouTube presentation:
+- **[YouTube Presentation Link](https://youtu.be/H_C7lUaVlX4)**
 
 ## Overview
 
@@ -23,10 +25,6 @@ implementation, and operation. This complexity often discourages organizations f
 In response, simpler ABAC solutions like Spring Security SpEL, jCasbin, and EasyABAC have emerged. These alternatives, though more lightweight, often
 sacrifice significant functionality, particularly in data access control. The market's inclination towards these simpler systems, as indicated by the
 adoption by various companies, showcases the demand for less cumbersome ABAC systems.
-
-## Presentation
-For a detailed overview of Soarse ABAC and Soarse Formula's functionalities, please view our YouTube presentation:
-- **[YouTube Presentation Link](https://youtu.be/H_C7lUaVlX4)**
 
 ## Advantages of Soarse ABAC
 
