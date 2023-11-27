@@ -69,7 +69,6 @@ To understand the background and architecture of the project, please refer to th
 
 - [Formula Structure](https://drive.google.com/file/d/1x83c6qpJYCsh04N_7P87GM77uwsPz28-/view?usp=sharing)
 - [Mechanism of Filtering](https://drive.google.com/file/d/13gTzW7anACbS7dQGdK_mZQZABnJYDxtM/view?usp=sharing)
-- [Evaluation and Simplification of Formulas](https://drive.google.com/file/d/1Dm1szQTATXdkVnOdMmpt_kk6I9PkCY_t/view?usp=sharing)
 
 ## Installation and Running Instructions
 
